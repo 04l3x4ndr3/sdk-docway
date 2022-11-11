@@ -1,0 +1,19 @@
+{
+    "name": "04l3x4ndr3/sdk-docway",
+    "description": "SDK Docway.co",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "TwoPlug\\SdkDocway\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "04l3x4ndr3",
+            "email": "alexandre@2plug.com.br"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.5.0"
+    }
+}
