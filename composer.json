@@ -2,7 +2,7 @@
   "name": "two_plug/sdk-docway",
   "description": "SDK de consumo de API da Docway.co",
   "minimum-stability": "stable",
-  "license": "MIT",
+  "license": "proprietary",
   "type": "library",
   "autoload": {
     "psr-4": {
