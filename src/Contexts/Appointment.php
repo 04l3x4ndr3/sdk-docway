@@ -2,6 +2,8 @@
 
 namespace TwoPlug\SdkDocway\Contexts;
 
+use GuzzleHttp\Exception\GuzzleException;
+use TwoPlug\SdkDocway\Configuration;
 use TwoPlug\SdkDocway\Helpers\CallApi;
 use TwoPlug\SdkDocway\Types\Address;
 
@@ -24,9 +26,10 @@ class Appointment extends CallApi {
 	private ?string $reason;
 	private ?string $gop;
 
-	public function __construct()
+	public function __construct(?Configuration $configuration = NULL)
 	{
-		parent::__construct();
+		parent::__construct($configuration);
+
 		$this->appointmentId = NULL;
 		$this->dateAppointment = NULL;
 		$this->buyerId = NULL;
@@ -65,15 +68,15 @@ class Appointment extends CallApi {
 	}
 
 	/**
-	 * @return string
+	 * @return string|null
 	 */
-	public function getDateAppointment(): string
+	public function getDateAppointment(): ?string
 	{
 		return $this->dateAppointment;
 	}
 
 	/**
-	 * @param string $dateAppointment
+	 * @param string|null $dateAppointment
 	 * @return Appointment
 	 */
 	public function setDateAppointment(?string $dateAppointment): self
@@ -83,15 +86,15 @@ class Appointment extends CallApi {
 	}
 
 	/**
-	 * @return string
+	 * @return string|null
 	 */
-	public function getBuyerId(): string
+	public function getBuyerId(): ?string
 	{
 		return $this->buyerId;
 	}
 
 	/**
-	 * @param string $buyerId
+	 * @param string|null $buyerId
 	 * @return Appointment
 	 */
 	public function setBuyerId(?string $buyerId): self
@@ -101,15 +104,15 @@ class Appointment extends CallApi {
 	}
 
 	/**
-	 * @return string
+	 * @return string|null
 	 */
-	public function getInsuranceId(): string
+	public function getInsuranceId(): ?string
 	{
 		return $this->insuranceId;
 	}
 
 	/**
-	 * @param string $insuranceId
+	 * @param string|null $insuranceId
 	 * @return Appointment
 	 */
 	public function setInsuranceId(?string $insuranceId): self
@@ -119,15 +122,15 @@ class Appointment extends CallApi {
 	}
 
 	/**
-	 * @return string
+	 * @return string|null
 	 */
-	public function getPartnerId(): string
+	public function getPartnerId(): ?string
 	{
 		return $this->partnerId;
 	}
 
 	/**
-	 * @param string $partnerId
+	 * @param string|null $partnerId
 	 * @return Appointment
 	 */
 	public function setPartnerId(?string $partnerId): self
@@ -137,15 +140,15 @@ class Appointment extends CallApi {
 	}
 
 	/**
-	 * @return Address
+	 * @return Address|null
 	 */
-	public function getAddress(): Address
+	public function getAddress(): ?Address
 	{
 		return $this->address;
 	}
 
 	/**
-	 * @param Address $address
+	 * @param Address|null $address
 	 * @return Appointment
 	 */
 	public function setAddress(?Address $address): self
@@ -155,15 +158,15 @@ class Appointment extends CallApi {
 	}
 
 	/**
-	 * @return int
+	 * @return int|null
 	 */
-	public function getSpecialtyId(): int
+	public function getSpecialtyId(): ?int
 	{
 		return $this->specialtyId;
 	}
 
 	/**
-	 * @param int $specialtyId
+	 * @param int|null $specialtyId
 	 * @return Appointment
 	 */
 	public function setSpecialtyId(?int $specialtyId): self
@@ -173,9 +176,9 @@ class Appointment extends CallApi {
 	}
 
 	/**
-	 * @return bool
+	 * @return bool|null
 	 */
-	public function isInsurance(): bool
+	public function isInsurance(): ?bool
 	{
 		return $this->isInsurance;
 	}
@@ -191,15 +194,15 @@ class Appointment extends CallApi {
 	}
 
 	/**
-	 * @return int
+	 * @return int|null
 	 */
-	public function getType(): int
+	public function getType(): ?int
 	{
 		return $this->type;
 	}
 
 	/**
-	 * @param int $type
+	 * @param int|null $type
 	 * @return Appointment
 	 */
 	public function setType(?int $type): self
@@ -245,15 +248,15 @@ class Appointment extends CallApi {
 	}
 
 	/**
-	 * @return string
+	 * @return string|null
 	 */
-	public function getContactNumber(): string
+	public function getContactNumber(): ?string
 	{
 		return $this->contactNumber;
 	}
 
 	/**
-	 * @param string $contactNumber
+	 * @param string|null $contactNumber
 	 * @return Appointment
 	 */
 	public function setContactNumber(?string $contactNumber): self
@@ -338,25 +341,26 @@ class Appointment extends CallApi {
 	 * @param string $patientId
 	 * @param Appointment|NULL $appointment
 	 * @return object
+	 * @throws GuzzleException
 	 */
 	public function save(string $patientId, Appointment $appointment = NULL): object
 	{
-		$body = toArray($appointment ?? $this);
+		$body = array_filter($this->toArray($appointment ?? $this));
 		return $this->call('POST', "appointment/api/patients/{$patientId}/appointments", $body);
 	}
 
 	/**
 	 * @param string $reason
-	 * @param int|null $appointmentId
+	 * @param int $appointmentId
 	 * @return object
+	 * @throws GuzzleException
 	 */
-	public function cancel(string $reason, ?int $appointmentId = NULL): object
+	public function cancel(string $reason, int $appointmentId): object
 	{
-		$id = intval(! isset($appointmentId) ? $this->appointmentId : $appointmentId);
 		$body = [
 			'reason' => $reason
 		];
-		return $this->call('POST', "appointment/api/appointments/{$id}/cancel", $body);
+		return $this->call('POST', "appointment/api/appointments/{$appointmentId}/cancel", $body);
 	}
 
 	/**
@@ -364,8 +368,9 @@ class Appointment extends CallApi {
 	 * @param $endDate
 	 * @param array|null $options
 	 * @return object
+	 * @throws GuzzleException
 	 */
-	public function getPaging($startDate, $endDate, ?array $options): object
+	public function getPaging($startDate, $endDate, ?array $options = NULL): object
 	{
 		$body = array_merge(["Start" => 0,
 			"CurrentPage" => 0,
@@ -381,29 +386,58 @@ class Appointment extends CallApi {
 	}
 
 	/**
+	 * @param int $appointmentId
+	 * @return object
+	 * @throws GuzzleException
+	 */
+	public function getDetail(int $appointmentId): object
+	{
+		return $this->call('GET', "appointment/api/appointments/{$appointmentId}/details");
+	}
+
+	/**
 	 * @param int|null $appointmentId
 	 * @return object
+	 * @throws GuzzleException
 	 */
-	public function getDatail(?int $appointmentId = NULL): object
+	public function videoToken(int $appointmentId = NULL): object
 	{
-		$id = intval(! isset($appointmentId) ? $this->appointmentId : $appointmentId);
-		return $this->call('GET', "appointment/api/appointments/{$id}/details");
+		return $this->call('GET', "appointment/api/appointments/{$appointmentId}/video-token");
 	}
 
 	/**
-	 * @return object
+	 * @return array
+	 * @throws GuzzleException
 	 */
-	public function videoAvailability(): object
-	{
-		$id = intval(! isset($appointmentId) ? $this->appointmentId : $appointmentId);
-		return $this->call('GET', "appointment/api/appointments/{$id}/video-token");
-	}
-
-	/**
-	 * @return object
-	 */
-	public function videoToken(): object
+	public function videoAvailability(): array
 	{
 		return $this->call('GET', "appointment/api/appointments/video/availability");
+	}
+
+	/**
+	 * Parse props to array
+	 * @param Appointment $appointment
+	 * @return array
+	 */
+	protected function toArray(Appointment $appointment): array
+	{
+		return [
+			'appointmentId' => $appointment->getAppointmentId(),
+			'dateAppointment' => $appointment->getDateAppointment(),
+			'buyerId' => $appointment->getBuyerId(),
+			'insuranceId' => $appointment->getInsuranceId(),
+			'partnerId' => $appointment->getPartnerId(),
+			'address' => $appointment->getAddress(),
+			'specialtyId' => $appointment->getSpecialtyId(),
+			'isInsurance' => $appointment->isInsurance(),
+			'type' => $appointment->getType(),
+			'timeZone' => $appointment->getTimeZone(),
+			'contactCode' => $appointment->getContactCode(),
+			'contactNumber' => $appointment->getContactNumber(),
+			'contactEmail' => $appointment->getContactEmail(),
+			'symptoms' => $appointment->getSymptoms(),
+			'reason' => $appointment->getReason(),
+			'gop' => $appointment->getGop(),
+		];
 	}
 }

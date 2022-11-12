@@ -3,12 +3,14 @@
 namespace TwoPlug\SdkDocway\Helpers;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Psr7\Request;
 use TwoPlug\SdkDocway\Configuration;
 
 class CallApi {
-	private array $header;
 	private Configuration $config;
+	private ?array $header;
+	private ?array $credential;
 
 	/**
 	 * @param Configuration|null $config
@@ -16,12 +18,6 @@ class CallApi {
 	public function __construct(?Configuration $config = NULL)
 	{
 		$this->config = $config ?? new Configuration();
-
-		$this->client = new Client([
-			'base_uri' => $this->config->getUrl(),
-			'timeout' => 60
-		]);
-
 		$this->credential = $this->config->getCredential();
 		$this->header = array_merge([
 			'User-Agent' => 'SDKDocway/1.0',
@@ -30,21 +26,20 @@ class CallApi {
 	}
 
 	/**
-	 * @return string
+	 * @return object
+	 * @throws GuzzleException
 	 */
-	public function accessToken(): string
+	public function accessToken(): object
 	{
-		$headers = array_merge([
-			'Content-Type' => 'application/x-www-form-urlencoded'
-		], $this->header);
+		$client = new Client();
 		$options = [
+			'headers' => [
+				'Content-Type' => 'application/x-www-form-urlencoded',
+			],
 			'form_params' => $this->config->getCredential()
 		];
-
-		$url = "auth/connect/token";
-		$req = new Request('POST', $url, $headers);
-		$res = $this->client->sendAsync($req, $options)->wait();
-		return $res->getBody();
+		$res = $client->request('POST', $this->config->getUrl() . 'auth/connect/token', $options);
+		return json_decode($res->getBody());
 	}
 
 	/**
@@ -52,18 +47,28 @@ class CallApi {
 	 * @param string $endpoint
 	 * @param array|null $body
 	 * @return object
+	 * @throws GuzzleException
 	 */
-	public function call(string $method, string $endpoint, ?array $body = NULL): object
+	public function call(string $method, string $endpoint, ?array $body = NULL): array|object
 	{
 		$token = $this->accessToken();
-		$headers = array_merge($this->header, [
-			'Content-type' => 'application/json',
-			'Authorization' => "{$token['token_type']} {$token['access_token']}"
+		$client = new Client();
+		$options = array_filter([
+			'headers' => [
+				'Content-type' => 'application/json',
+				'Authorization' => "{$token->token_type} {$token->access_token}"
+			],
+			'json' => $body
 		]);
-		$body = ( ! empty($body)) ? json_encode($body) : NULL;
-		$req = new Request($method, $endpoint, $headers, $body);
-		$res = $this->client->sendAsync($req)->wait();
+		$res = $client->request($method, "{$this->config->getUrl()}{$endpoint}", $options);
+		return json_decode($res->getBody());
+	}
 
-		return json_decode($res->getBody(), FALSE);
+	/**
+	 * @return Configuration
+	 */
+	public function getConfig(): Configuration
+	{
+		return $this->config;
 	}
 }

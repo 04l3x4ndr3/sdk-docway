@@ -13,27 +13,26 @@ class  Configuration {
 	public const URL_STAGE = "https://service.docway.com.br/stage-";
 	public const URL_PRODUCTION = "https://service.docway.com.br/";
 
-	private string $environment;
-	private array $credentials;
-	private array $httpHeader;
+	private ?string $environment;
+	private ?array $credentials;
+	private ?array $httpHeader;
 
-	public function __construct(?string $grantType = null, ?string $scope = null, ?string $patternId = null, ?string $clientId = null, ?string $clientSecret = null)
+	public function __construct(?string $grantType = NULL, ?string $scope = NULL, ?string $clientId = NULL, ?string $clientSecret = NULL)
 	{
-		$this->setCredential(
-			$_SERVER['DOCWAY_GRANT_TYPE'] ?? $grantType,
-			$_SERVER['DOCWAY_SCOPE'] ?? $scope,
-			$_SERVER['DOCWAY_PATTERNID'] ?? $patternId,
-			$_SERVER['DOCWAY_CLIENT_ID'] ?? $clientId,
-			$_SERVER['DOCWAY_CLIENT_SECRET'] ?? $clientSecret
-		);
-
-		$this->setEnvironment($_SERVER['DOCWAY_ENVIRONMENT'] ?? self::ENV_STAGE);
+		$this->credentials = [
+			'grant_type' => $_SERVER['DOCWAY_GRANT_TYPE'] ?? $grantType,
+			'scope' => $_SERVER['DOCWAY_SCOPE'] ?? $scope,
+			'client_id' => $_SERVER['DOCWAY_CLIENT_ID'] ?? $clientId,
+			'client_secret' => $_SERVER['DOCWAY_CLIENT_SECRET'] ?? $clientSecret
+		];
+		$this->httpHeader = [];
+		$this->environment = $_SERVER['DOCWAY_ENVIRONMENT'] ?? self::ENV_STAGE;
 	}
 
 	/**
-	 * @return array
+	 * @return array|null
 	 */
-	public function getCredential(): array
+	public function getCredential(): ?array
 	{
 		return $this->credentials;
 	}
@@ -41,18 +40,16 @@ class  Configuration {
 	/**
 	 * @param string|null $grantType
 	 * @param string|null $scope
-	 * @param string|null $patternId
 	 * @param string|null $clientId
 	 * @param string|null $clientSecret
 	 * @return void
 	 */
-	public function setCredential(?string $grantType=null, ?string $scope=null, ?string $patternId=null, ?string $clientId=null, ?string $clientSecret=null): void
+	public function setCredential(?string $grantType = NULL, ?string $scope = NULL, ?string $clientId = NULL, ?string $clientSecret = NULL): void
 	{
 		$cur = $this->credentials;
 		$new = [
 			'grant_type' => $grantType,
 			'scope' => $scope,
-			'patternId' => $patternId,
 			'client_id' => $clientId,
 			'client_secret' => $clientSecret
 		];
@@ -60,18 +57,9 @@ class  Configuration {
 	}
 
 	/**
-	 * @param bool $val
-	 * @return bool
-	 */
-	public function showHttpErrors(bool $val = FALSE): bool
-	{
-		return $val;
-	}
-
-	/**
 	 * @return string
 	 */
-	public function getEnvironment(): string
+	public function getEnvironment(): ?string
 	{
 		return $this->environment;
 	}
@@ -86,9 +74,9 @@ class  Configuration {
 	}
 
 	/**
-	 * @return array
+	 * @return array|null
 	 */
-	public function getHttpHeader(): array
+	public function getHttpHeader(): ?array
 	{
 		return $this->httpHeader;
 	}

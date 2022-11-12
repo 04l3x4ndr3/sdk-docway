@@ -2,11 +2,15 @@
 
 namespace TwoPlug\SdkDocway\Contexts;
 
+use GuzzleHttp\Exception\GuzzleException;
+use TwoPlug\SdkDocway\Configuration;
 use TwoPlug\SdkDocway\Helpers\CallApi;
 use TwoPlug\SdkDocway\Types\Address;
 
 class Client extends CallApi {
 
+	private ?string $name;
+	private ?string $cpf;
 	private ?string $email;
 	private ?string $userName;
 	private ?string $password;
@@ -26,10 +30,12 @@ class Client extends CallApi {
 	private ?string $placeOfBirth;
 	private ?array $addresses;
 
-	public function __construct()
+	public function __construct(?Configuration $configuration = null)
 	{
-		parent::__construct();
+		parent::__construct($configuration);
 
+		$this->name = NULL;
+		$this->cpf = NULL;
 		$this->email = NULL;
 		$this->userName = NULL;
 		$this->password = NULL;
@@ -48,7 +54,45 @@ class Client extends CallApi {
 		$this->motherName = NULL;
 		$this->placeOfBirth = NULL;
 		$this->addresses = NULL;
+
 	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getName(): ?string
+	{
+		return $this->name;
+	}
+
+	/**
+	 * @param string|null $name
+	 * @return Client
+	 */
+	public function setName(?string $name): self
+	{
+		$this->name = $name;
+		return $this;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getCpf(): ?string
+	{
+		return $this->cpf;
+	}
+
+	/**
+	 * @param string|null $cpf
+	 * @return Client
+	 */
+	public function setCpf(?string $cpf): self
+	{
+		$this->cpf = $cpf;
+		return $this;
+	}
+
 
 	/**
 	 * @return string|null
@@ -60,7 +104,7 @@ class Client extends CallApi {
 
 	/**
 	 * @param string|null $email
-	 * @return Patient
+	 * @return Client
 	 */
 	public function setEmail(?string $email): self
 	{
@@ -78,7 +122,7 @@ class Client extends CallApi {
 
 	/**
 	 * @param string|null $userName
-	 * @return Patient
+	 * @return Client
 	 */
 	public function setUserName(?string $userName): self
 	{
@@ -96,7 +140,7 @@ class Client extends CallApi {
 
 	/**
 	 * @param string|null $password
-	 * @return Patient
+	 * @return Client
 	 */
 	public function setPassword(?string $password): self
 	{
@@ -114,7 +158,7 @@ class Client extends CallApi {
 
 	/**
 	 * @param string|null $phoneNumber
-	 * @return Patient
+	 * @return Client
 	 */
 	public function setPhoneNumber(?string $phoneNumber): self
 	{
@@ -132,7 +176,7 @@ class Client extends CallApi {
 
 	/**
 	 * @param int|null $countryCode
-	 * @return Patient
+	 * @return Client
 	 */
 	public function setCountryCode(?int $countryCode): self
 	{
@@ -150,7 +194,7 @@ class Client extends CallApi {
 
 	/**
 	 * @param string|null $dateOfBirth
-	 * @return Patient
+	 * @return Client
 	 */
 	public function setDateOfBirth(?string $dateOfBirth): self
 	{
@@ -168,7 +212,7 @@ class Client extends CallApi {
 
 	/**
 	 * @param string|null $gender
-	 * @return Patient
+	 * @return Client
 	 */
 	public function setGender(?string $gender): self
 	{
@@ -186,7 +230,7 @@ class Client extends CallApi {
 
 	/**
 	 * @param float|null $weight
-	 * @return Patient
+	 * @return Client
 	 */
 	public function setWeight(?float $weight): self
 	{
@@ -204,7 +248,7 @@ class Client extends CallApi {
 
 	/**
 	 * @param float|null $height
-	 * @return Patient
+	 * @return Client
 	 */
 	public function setHeight(?float $height): self
 	{
@@ -222,7 +266,7 @@ class Client extends CallApi {
 
 	/**
 	 * @param string|null $healthProblems
-	 * @return Patient
+	 * @return Client
 	 */
 	public function setHealthProblems(?string $healthProblems): self
 	{
@@ -240,7 +284,7 @@ class Client extends CallApi {
 
 	/**
 	 * @param string|null $allergiesAndReactions
-	 * @return Patient
+	 * @return Client
 	 */
 	public function setAllergiesAndReactions(?string $allergiesAndReactions): self
 	{
@@ -258,7 +302,7 @@ class Client extends CallApi {
 
 	/**
 	 * @param string|null $medicines
-	 * @return Patient
+	 * @return Client
 	 */
 	public function setMedicines(?string $medicines): self
 	{
@@ -276,7 +320,7 @@ class Client extends CallApi {
 
 	/**
 	 * @param string|null $bloodType
-	 * @return Patient
+	 * @return Client
 	 */
 	public function setBloodType(?string $bloodType): self
 	{
@@ -294,7 +338,7 @@ class Client extends CallApi {
 
 	/**
 	 * @param string|null $healthInsuranceNumber
-	 * @return Patient
+	 * @return Client
 	 */
 	public function setHealthInsuranceNumber(?string $healthInsuranceNumber): self
 	{
@@ -312,7 +356,7 @@ class Client extends CallApi {
 
 	/**
 	 * @param string|null $partnerId
-	 * @return Patient
+	 * @return Client
 	 */
 	public function setPartnerId(?string $partnerId): self
 	{
@@ -330,7 +374,7 @@ class Client extends CallApi {
 
 	/**
 	 * @param string|null $motherName
-	 * @return Patient
+	 * @return Client
 	 */
 	public function setMotherName(?string $motherName): self
 	{
@@ -348,7 +392,7 @@ class Client extends CallApi {
 
 	/**
 	 * @param string|null $placeOfBirth
-	 * @return Patient
+	 * @return Client
 	 */
 	public function setPlaceOfBirth(?string $placeOfBirth): self
 	{
@@ -365,8 +409,8 @@ class Client extends CallApi {
 	}
 
 	/**
-	 * @param array|null $addresses
-	 * @return Patient
+	 * @param Address $addresses
+	 * @return Client
 	 */
 	public function addAddresses(Address $addresses): self
 	{
@@ -376,11 +420,12 @@ class Client extends CallApi {
 
 	/**
 	 * Add Patient Holder or Dependents
-	 * @param Patient|null $patient
+	 * @param Client|null $patient
 	 * @param string|null $patientId
 	 * @return object
+	 * @throws GuzzleException
 	 */
-	public function savePatient(?Patient $patient = NULL, ?string $patientId = NULL): object
+	public function savePatient(?Client $patient = NULL, ?string $patientId = NULL): object
 	{
 		$body = $this->toArray($patient ?? $this);
 
@@ -395,6 +440,7 @@ class Client extends CallApi {
 	 * Get Patient by Id
 	 * @param string|null $patientId
 	 * @return object
+	 * @throws GuzzleException
 	 */
 	public function getPatient(?string $patientId=null): object
 	{
@@ -403,30 +449,32 @@ class Client extends CallApi {
 
 	/**
 	 * Parse props to array
-	 * @param Patient $patient
+	 * @param Client $client
 	 * @return array
 	 */
-	protected function toArray(Patient $patient): array
+	protected function toArray(Client $client): array
 	{
 		return [
-			'email' => $patient->getEmail(),
-			'userName' => $patient->getUserName(),
-			'password' => $patient->getPassword(),
-			'phoneNumber' => $patient->getPhoneNumber(),
-			'countryCode' => $patient->getCountryCode(),
-			'dateOfBirth' => $patient->getDateOfBirth(),
-			'gender' => $patient->getGender(),
-			'weight' => $patient->getWeight(),
-			'height' => $patient->getHeight(),
-			'healthProblems' => $patient->getHealthProblems(),
-			'allergiesAndReactions' => $patient->getAllergiesAndReactions(),
-			'medicines' => $patient->getMedicines(),
-			'bloodType' => $patient->getBloodType(),
-			'healthInsuranceNumber' => $patient->getHealthInsuranceNumber(),
-			'partnerId' => $patient->getPartnerId(),
-			'motherName' => $patient->getMotherName(),
-			'placeOfBirth' => $patient->getPlaceOfBirth(),
-			'addresses' => $patient->getAddresses(),
+			'name' => $client->getName(),
+			'cpf' => preg_replace('/\D/', '', $client->getCpf()),
+			'email' => $client->getEmail(),
+			'userName' => $client->getUserName(),
+			'password' => $client->getPassword(),
+			'phoneNumber' => $client->getPhoneNumber(),
+			'countryCode' => $client->getCountryCode(),
+			'dateOfBirth' => $client->getDateOfBirth(),
+			'sexo' => $client->getGender(),
+			'weight' => $client->getWeight(),
+			'height' => $client->getHeight(),
+			'healthProblems' => $client->getHealthProblems(),
+			'allergiesAndReactions' => $client->getAllergiesAndReactions(),
+			'medicines' => $client->getMedicines(),
+			'bloodType' => $client->getBloodType(),
+			'healthInsuranceNumber' => $client->getHealthInsuranceNumber(),
+			'partnerId' => $client->getPartnerId(),
+			'motherName' => $client->getMotherName(),
+			'placeOfBirth' => $client->getPlaceOfBirth(),
+			'addresses' => $client->getAddresses(),
 		];
 	}
 }

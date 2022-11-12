@@ -24,7 +24,7 @@ class Address {
 	 * @param string|null $latitude
 	 * @param string|null $longitude
 	 */
-	public function __construct(?string $street, ?string $number, ?string $complement, ?string $neighborhood, ?string $cep, ?string $city, ?string $state, ?string $latitude, ?string $longitude)
+	public function __construct(?string $street = NULL, ?string $number = NULL, ?string $complement = NULL, ?string $neighborhood = NULL, ?string $cep = NULL, ?string $city = NULL, ?string $state = NULL, ?string $latitude = NULL, ?string $longitude = NULL)
 	{
 		$this->street = $street;
 		$this->number = $number;
