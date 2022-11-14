@@ -1,6 +1,6 @@
 <?php
 
-namespace TwoPlug\SdkDocway\Types;
+namespace O4l3x4ndr3\SdkDocway\Types;
 
 class Address {
 	private ?string $street;

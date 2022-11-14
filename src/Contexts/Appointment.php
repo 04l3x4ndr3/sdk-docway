@@ -1,11 +1,11 @@
 <?php
 
-namespace TwoPlug\SdkDocway\Contexts;
+namespace O4l3x4ndr3\SdkDocway\Contexts;
 
 use GuzzleHttp\Exception\GuzzleException;
-use TwoPlug\SdkDocway\Configuration;
-use TwoPlug\SdkDocway\Helpers\CallApi;
-use TwoPlug\SdkDocway\Types\Address;
+use O4l3x4ndr3\SdkDocway\Configuration;
+use O4l3x4ndr3\SdkDocway\Helpers\CallApi;
+use O4l3x4ndr3\SdkDocway\Types\Address;
 
 class Appointment extends CallApi {
 

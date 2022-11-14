@@ -5,10 +5,10 @@
  * @repository:  https://github.com/04l3x4ndr3/sdk-docway
  */
 
-namespace TwoPlug\SdkDocway;
+namespace O4l3x4ndr3\SdkDocway;
 
 class  Configuration {
-	public const ENV_STAGE = "stage";
+	public const ENV_STAGE = "development";
 	public const ENV_PRODUCTION = "production";
 	public const URL_STAGE = "https://service.docway.com.br/stage-";
 	public const URL_PRODUCTION = "https://service.docway.com.br/";

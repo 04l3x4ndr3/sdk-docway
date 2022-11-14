@@ -1,11 +1,10 @@
 <?php
 
-namespace TwoPlug\SdkDocway\Helpers;
+namespace O4l3x4ndr3\SdkDocway\Helpers;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
-use GuzzleHttp\Psr7\Request;
-use TwoPlug\SdkDocway\Configuration;
+use O4l3x4ndr3\SdkDocway\Configuration;
 
 class CallApi {
 	private Configuration $config;

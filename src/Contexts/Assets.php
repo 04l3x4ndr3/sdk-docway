@@ -1,9 +1,9 @@
 <?php
 
-namespace TwoPlug\SdkDocway\Contexts;
+namespace O4l3x4ndr3\SdkDocway\Contexts;
 
-use TwoPlug\SdkDocway\Configuration;
-use TwoPlug\SdkDocway\Helpers\CallApi;
+use O4l3x4ndr3\SdkDocway\Configuration;
+use O4l3x4ndr3\SdkDocway\Helpers\CallApi;
 
 class Assets extends CallApi {
 
