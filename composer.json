@@ -1,12 +1,12 @@
 {
-  "name": "two_plug/sdk-docway",
+  "name": "O4l3x4ndr3/sdk-docway",
   "description": "SDK de consumo de API da Docway.co",
   "minimum-stability": "stable",
   "license": "proprietary",
   "type": "library",
   "autoload": {
     "psr-4": {
-      "TwoPlug\\SdkDocway\\": "src/"
+      "O4l3x4ndr3\\SdkDocway\\": "src/"
     }
   },
   "authors": [
