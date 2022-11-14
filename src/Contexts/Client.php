@@ -9,6 +9,8 @@ use O4l3x4ndr3\SdkDocway\Types\Address;
 
 class Client extends CallApi {
 
+	private ?string $clientId;
+	private ?string $id;
 	private ?string $name;
 	private ?string $cpf;
 	private ?string $email;
@@ -17,6 +19,7 @@ class Client extends CallApi {
 	private ?string $phoneNumber;
 	private ?int $countryCode;
 	private ?string $dateOfBirth;
+	private ?string $age;
 	private ?string $gender;
 	private ?float $weight;
 	private ?float $height;
@@ -24,13 +27,18 @@ class Client extends CallApi {
 	private ?string $allergiesAndReactions;
 	private ?string $medicines;
 	private ?string $bloodType;
+	private ?string $healthInsurance;
 	private ?string $healthInsuranceNumber;
 	private ?string $partnerId;
 	private ?string $motherName;
 	private ?string $placeOfBirth;
 	private ?array $addresses;
+	private ?array $creditCards;
+	private ?array $dependents;
+	private ?bool $isSUSEnabled;
+	private ?string $createDate;
 
-	public function __construct(?Configuration $configuration = null)
+	public function __construct(?Configuration $configuration = NULL)
 	{
 		parent::__construct($configuration);
 
@@ -54,7 +62,141 @@ class Client extends CallApi {
 		$this->motherName = NULL;
 		$this->placeOfBirth = NULL;
 		$this->addresses = NULL;
+		$this->clientId = NULL;
+		$this->id = NULL;
+		$this->age = NULL;
+		$this->creditCards = NULL;
+		$this->dependents = NULL;
+		$this->isSUSEnabled = NULL;
+		$this->createDate = NULL;
+	}
 
+	/**
+	 * @return string|null
+	 */
+	public function getClientId(): ?string
+	{
+		return $this->clientId;
+	}
+
+	/**
+	 * @param string|null $clientId
+	 */
+	public function setClientId(?string $clientId): void
+	{
+		$this->clientId = $clientId;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getId(): ?string
+	{
+		return $this->id;
+	}
+
+	/**
+	 * @param string|null $id
+	 */
+	public function setId(?string $id): void
+	{
+		$this->id = $id;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getAge(): ?string
+	{
+		return $this->age;
+	}
+
+	/**
+	 * @param string|null $age
+	 */
+	public function setAge(?string $age): void
+	{
+		$this->age = $age;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getHealthInsurance(): ?string
+	{
+		return $this->healthInsurance;
+	}
+
+	/**
+	 * @param string|null $healthInsurance
+	 */
+	public function setHealthInsurance(?string $healthInsurance): void
+	{
+		$this->healthInsurance = $healthInsurance;
+	}
+
+	/**
+	 * @return array|null
+	 */
+	public function getCreditCards(): ?array
+	{
+		return $this->creditCards;
+	}
+
+	/**
+	 * @param array|null $creditCards
+	 */
+	public function setCreditCards(?array $creditCards): void
+	{
+		$this->creditCards = $creditCards;
+	}
+
+	/**
+	 * @return array|null
+	 */
+	public function getDependents(): ?array
+	{
+		return $this->dependents;
+	}
+
+	/**
+	 * @param array|null $dependents
+	 */
+	public function setDependents(?array $dependents): void
+	{
+		$this->dependents = $dependents;
+	}
+
+	/**
+	 * @return bool|null
+	 */
+	public function getIsSUSEnabled(): ?bool
+	{
+		return $this->isSUSEnabled;
+	}
+
+	/**
+	 * @param bool|null $isSUSEnabled
+	 */
+	public function setIsSUSEnabled(?bool $isSUSEnabled): void
+	{
+		$this->isSUSEnabled = $isSUSEnabled;
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getCreateDate(): ?string
+	{
+		return $this->createDate;
+	}
+
+	/**
+	 * @param string|null $createDate
+	 */
+	public function setCreateDate(?string $createDate): void
+	{
+		$this->createDate = $createDate;
 	}
 
 	/**
@@ -431,9 +573,13 @@ class Client extends CallApi {
 
 		$endpoint = ( ! isset($patientId)) ? 'client/api/patients' : "client/api/patients/{$patientId}/dependents";
 
-		return $this->call('POST', $endpoint, array_filter($body, function ($value) {
+		$client = $this->call('POST', $endpoint, array_filter($body, function ($value) {
 			return ! is_null($value);
 		}));
+
+		$this->fill($client);
+
+		return $this;
 	}
 
 	/**
@@ -442,7 +588,7 @@ class Client extends CallApi {
 	 * @return object
 	 * @throws GuzzleException
 	 */
-	public function getPatient(?string $patientId=null): object
+	public function getPatient(?string $patientId = NULL): object
 	{
 		return $this->call('GET', "client/api/patients/{$patientId}");
 	}
@@ -452,7 +598,7 @@ class Client extends CallApi {
 	 * @param Client $client
 	 * @return array
 	 */
-	protected function toArray(Client $client): array
+	private function toArray(Client $client): array
 	{
 		return [
 			'name' => $client->getName(),
@@ -476,5 +622,12 @@ class Client extends CallApi {
 			'placeOfBirth' => $client->getPlaceOfBirth(),
 			'addresses' => $client->getAddresses(),
 		];
+	}
+
+	private function fill(Client $client): void
+	{
+		foreach ($client as $prop=>$value){
+			$this->{$prop} = $value;
+		}
 	}
 }

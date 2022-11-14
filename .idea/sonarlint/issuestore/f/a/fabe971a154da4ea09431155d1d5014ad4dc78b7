@@ -1,0 +1,12 @@
+
+R	php:S1808
+"=Move this open curly brace to the beginning of the next line.(ðÄ°
+U	php:S1808c";Move this open curly brace to the end of the previous line.(ÒÌâ–øÿÿÿÿ
+>	php:S1781")Write this "NULL" constant in lower case.(ò›á²
+>	php:S1781")Write this "NULL" constant in lower case.(ò›á²
+>	php:S1781")Write this "NULL" constant in lower case.(ò›á²
+>	php:S1781")Write this "NULL" constant in lower case.(ò›á²
+>	php:S1781/")Write this "NULL" constant in lower case.(øðŽ¬
+>	php:S1781/")Write this "NULL" constant in lower case.(øðŽ¬
+>	php:S1781/")Write this "NULL" constant in lower case.(øðŽ¬
+>	php:S1781/")Write this "NULL" constant in lower case.(øðŽ¬
