@@ -1,10 +1,0 @@
-
-U	php:S1808";Move this open curly brace to the end of the previous line.(ÒÌâ–øÿÿÿÿ
-U	php:S1808 ";Move this open curly brace to the end of the previous line.(ÒÌâ–øÿÿÿÿ
-U	php:S1808n";Move this open curly brace to the end of the previous line.(ÒÌâ–øÿÿÿÿ
-D	php:S1808"/Align all arguments in this list at column "5".(Û‘â
-C	php:S1808".Move the closing parenthesis on the next line.(íË³Ž
-7	php:S1780p"Remove this closing tag "?>".(¸Ø¥ðþÿÿÿÿ
->	php:S17819")Write this "NULL" constant in lower case.(ØÚ£ö
-k	php:S4833"QReplace "require_once" with namespace import mechanism through the "use" keyword.(ÃéŸ™ÿÿÿÿÿ
-Jphp:S131"7Add a "case default" clause to this "switch" statement.(¤“³'

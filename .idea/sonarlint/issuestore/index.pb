@@ -8,8 +8,6 @@ I
 .gitignore,a/5/a5cc2925ca8258af241be7e5b0381edf30266302
 =
 composer.lock,c/3/c3262e2a0879195bd6a727e90f768bc85ad79ffd
-B
-examples/index.php,1/4/14beb5c7b9485599ca7733005e1b6313ca361be5
 J
 src/Errors/DocwayError.php,8/6/862de24d6e5c1f505b1560b93d5444d423d64068
 G
@@ -22,7 +20,3 @@ G
 src/Helpers/CallApi.php,f/7/f75bb8c3a8d0e7cccaa285b96a765a0b45236537
 V
 &vendor/guzzlehttp/guzzle/composer.json,a/a/aa6ef15f01937bedaba30847d8b80db967c60752
-=
-composer.json,3/9/3957b91a0d8450cea0115cfd5af69eac90d75897
-E
-src/Configuration.php,f/a/fabe971a154da4ea09431155d1d5014ad4dc78b7

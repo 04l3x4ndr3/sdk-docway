@@ -567,7 +567,7 @@ class Client extends CallApi {
 	 * @return object
 	 * @throws GuzzleException
 	 */
-	public function savePatient(?Client $patient = NULL, ?string $patientId = NULL): object
+	public function savePatient(?Client $patient = NULL, ?string $patientId = NULL): self
 	{
 		$body = $this->toArray($patient ?? $this);
 
@@ -624,9 +624,10 @@ class Client extends CallApi {
 		];
 	}
 
-	private function fill(Client $client): void
+	private function fill(object $client): void
 	{
-		foreach ($client as $prop=>$value){
+		foreach ($client as $prop => $value)
+		{
 			$this->{$prop} = $value;
 		}
 	}
