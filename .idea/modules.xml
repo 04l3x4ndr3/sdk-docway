@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/sdk-docway.iml" filepath="$PROJECT_DIR$/.idea/sdk-docway.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../sdk-fibank-baas/.idea/sdk-fibank-baas.iml" filepath="$PROJECT_DIR$/../sdk-fibank-baas/.idea/sdk-fibank-baas.iml" />
     </modules>
   </component>
 </project>

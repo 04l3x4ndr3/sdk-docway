@@ -30,9 +30,9 @@ class  Configuration {
 	}
 
 	/**
-	 * @return array|null
+	 * @return array
 	 */
-	public function getCredential(): ?array
+	public function getCredential(): array
 	{
 		return $this->credentials;
 	}
