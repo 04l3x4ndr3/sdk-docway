@@ -60,7 +60,7 @@ class CallApi {
 			'json' => $body
 		]);
 		$res = $client->request($method, "{$this->config->getUrl()}{$endpoint}", $options);
-		return json_decode($res->getBody(), false);
+		return (object) json_decode($res->getBody());
 	}
 
 	/**
