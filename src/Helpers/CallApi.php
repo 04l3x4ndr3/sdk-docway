@@ -48,7 +48,7 @@ class CallApi {
 	 * @return object
 	 * @throws GuzzleException
 	 */
-	public function call(string $method, string $endpoint, ?array $body = NULL): array|object
+	public function call(string $method, string $endpoint, ?array $body = NULL): ?object
 	{
 		$token = $this->accessToken();
 		$client = new Client();
@@ -60,7 +60,7 @@ class CallApi {
 			'json' => $body
 		]);
 		$res = $client->request($method, "{$this->config->getUrl()}{$endpoint}", $options);
-		return json_decode($res->getBody());
+		return json_decode($res->getBody(), false);
 	}
 
 	/**

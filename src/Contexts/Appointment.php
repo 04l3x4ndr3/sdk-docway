@@ -9,7 +9,6 @@ use O4l3x4ndr3\SdkDocway\Types\Address;
 
 class Appointment extends CallApi
 {
-
     private ?int $appointmentId;
     private ?string $dateAppointment;
     private ?string $buyerId;
