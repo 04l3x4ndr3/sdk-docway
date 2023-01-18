@@ -1,5 +1,5 @@
 <?php
-namespace O4l3x4ndr3\SdkDocway\Helpers;
+namespace O4l3x4ndr3\SdkDocway\Constants;
 
 /**
  * appointment status
