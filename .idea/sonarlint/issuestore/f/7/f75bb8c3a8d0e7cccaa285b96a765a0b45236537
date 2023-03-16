@@ -1,4 +1,4 @@
 
 R	php:S1808	"=Move this open curly brace to the beginning of the next line.(ÖÖƒÕ
-^	php:S1808A"=Move this open curly brace to the beginning of the next line.(ô¹ç øÿÿÿÿ8É³Ú½Ç0
-J	php:S1781")Write this "NULL" constant in lower case.(Ûô¥ôùÿÿÿÿ8É³Ú½Ç0
+J	php:S1781")Write this "NULL" constant in lower case.(ßœ·ıÿÿÿÿ8Şş…²Ü0
+J	php:S17813")Write this "NULL" constant in lower case.(Ûµ²…ıÿÿÿÿ8Şş…²Ü0
