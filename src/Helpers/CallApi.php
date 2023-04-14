@@ -24,6 +24,44 @@ class CallApi {
 		], $this->config->getHttpHeader());
 	}
 
+    /**
+     * @return array|null
+     */
+    public function getHeader(): ?array
+    {
+        return $this->header;
+    }
+
+    /**
+     * @param array|null $header
+     *
+     * @return CallApi
+     */
+    public function setHeader(?array $header): CallApi
+    {
+        $this->header = $header;
+        return $this;
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getCredential(): ?array
+    {
+        return $this->credential;
+    }
+
+    /**
+     * @param array|null $credential
+     *
+     * @return CallApi
+     */
+    public function setCredential(?array $credential): CallApi
+    {
+        $this->credential = $credential;
+        return $this;
+    }
+
 	/**
 	 * @return object
 	 * @throws GuzzleException

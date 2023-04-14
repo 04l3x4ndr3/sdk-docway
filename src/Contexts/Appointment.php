@@ -62,7 +62,7 @@ class Appointment extends CallApi
      *
      * @return Appointment
      */
-    public function setAppointmentId(?int $appointmentId): self
+    public function setAppointmentId(?int $appointmentId): Appointment
     {
         $this->appointmentId = $appointmentId;
         return $this;
@@ -81,7 +81,7 @@ class Appointment extends CallApi
      *
      * @return Appointment
      */
-    public function setDateAppointment(?string $dateAppointment): self
+    public function setDateAppointment(?string $dateAppointment): Appointment
     {
         $this->dateAppointment = $dateAppointment;
         return $this;
@@ -100,7 +100,7 @@ class Appointment extends CallApi
      *
      * @return Appointment
      */
-    public function setBuyerId(?string $buyerId): self
+    public function setBuyerId(?string $buyerId): Appointment
     {
         $this->buyerId = $buyerId;
         return $this;
@@ -119,7 +119,7 @@ class Appointment extends CallApi
      *
      * @return Appointment
      */
-    public function setInsuranceId(?string $insuranceId): self
+    public function setInsuranceId(?string $insuranceId): Appointment
     {
         $this->insuranceId = $insuranceId;
         return $this;
@@ -138,7 +138,7 @@ class Appointment extends CallApi
      *
      * @return Appointment
      */
-    public function setPartnerId(?string $partnerId): self
+    public function setPartnerId(?string $partnerId): Appointment
     {
         $this->partnerId = $partnerId;
         return $this;
@@ -157,7 +157,7 @@ class Appointment extends CallApi
      *
      * @return Appointment
      */
-    public function setAddress(?Address $address): self
+    public function setAddress(?Address $address): Appointment
     {
         $this->address = $address;
         return $this;
@@ -176,7 +176,7 @@ class Appointment extends CallApi
      *
      * @return Appointment
      */
-    public function setSpecialtyId(?int $specialtyId): self
+    public function setSpecialtyId(?int $specialtyId): Appointment
     {
         $this->specialtyId = $specialtyId;
         return $this;
@@ -195,7 +195,7 @@ class Appointment extends CallApi
      *
      * @return Appointment
      */
-    public function setIsInsurance(bool $isInsurance): self
+    public function setIsInsurance(bool $isInsurance): Appointment
     {
         $this->isInsurance = $isInsurance;
         return $this;
@@ -214,7 +214,7 @@ class Appointment extends CallApi
      *
      * @return Appointment
      */
-    public function setType(?int $type): self
+    public function setType(?int $type): Appointment
     {
         $this->type = $type;
         return $this;
@@ -233,7 +233,7 @@ class Appointment extends CallApi
      *
      * @return Appointment
      */
-    public function setTimeZone(?array $timeZone): self
+    public function setTimeZone(?array $timeZone): Appointment
     {
         $this->timeZone = $timeZone;
         return $this;
@@ -252,7 +252,7 @@ class Appointment extends CallApi
      *
      * @return Appointment
      */
-    public function setContactCode(?string $contactCode): self
+    public function setContactCode(?string $contactCode): Appointment
     {
         $this->contactCode = $contactCode;
         return $this;
@@ -271,7 +271,7 @@ class Appointment extends CallApi
      *
      * @return Appointment
      */
-    public function setContactNumber(?string $contactNumber): self
+    public function setContactNumber(?string $contactNumber): Appointment
     {
         $this->contactNumber = $contactNumber;
         return $this;
@@ -290,7 +290,7 @@ class Appointment extends CallApi
      *
      * @return Appointment
      */
-    public function setContactEmail(?string $contactEmail): self
+    public function setContactEmail(?string $contactEmail): Appointment
     {
         $this->contactEmail = $contactEmail;
         return $this;
@@ -309,7 +309,7 @@ class Appointment extends CallApi
      *
      * @return Appointment
      */
-    public function setSymptoms(?array $symptoms): self
+    public function setSymptoms(?array $symptoms): Appointment
     {
         $this->symptoms = $symptoms;
         return $this;
@@ -328,7 +328,7 @@ class Appointment extends CallApi
      *
      * @return Appointment
      */
-    public function setReason(?string $reason): self
+    public function setReason(?string $reason): Appointment
     {
         $this->reason = $reason;
         return $this;
@@ -347,7 +347,7 @@ class Appointment extends CallApi
      *
      * @return Appointment
      */
-    public function setGop(?string $gop): self
+    public function setGop(?string $gop): Appointment
     {
         $this->gop = $gop;
         return $this;
