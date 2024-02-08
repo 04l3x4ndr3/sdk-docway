@@ -455,7 +455,7 @@ class Appointment extends CallApi
             'insuranceId' => $this->insuranceId,
             'partnerId' => $this->partnerId,
             'address' => isset($this->address) ? $this->address->toArray() : null,
-            'specialtyId' => $this->specialtyId,
+            'specialty' => array_filter(['id' => $this->specialtyId]),
             'isInsurance' => $this->isInsurance,
             'type' => $this->type,
             'timeZone' => $this->timeZone,
