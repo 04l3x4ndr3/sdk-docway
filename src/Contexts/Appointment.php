@@ -439,8 +439,6 @@ class Appointment extends CallApi
     /**
      * Parse props to array
      *
-     * @param Appointment $appointment
-     *
      * @return array
      */
     public function toArray(): array
