@@ -5,7 +5,6 @@ composer.phar
 
 ### JetBrains template
 .idea/*
-.idea/sonarlint/
 
 ### macOS template
 # General
