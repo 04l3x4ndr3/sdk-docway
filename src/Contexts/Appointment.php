@@ -354,7 +354,7 @@ class Appointment extends CallApi
     }
 
     /**
-     * @param string           $patientId
+     * @param string $patientId
      * @param Appointment|NULL $appointment
      *
      * @return object
@@ -368,7 +368,7 @@ class Appointment extends CallApi
 
     /**
      * @param string $reason
-     * @param int    $appointmentId
+     * @param int $appointmentId
      *
      * @return object
      * @throws GuzzleException
@@ -443,7 +443,7 @@ class Appointment extends CallApi
      */
     public function toArray(): array
     {
-        if(isset($this->address)){
+        if (isset($this->address)) {
             $address = $this->address->toArray();
         }
         return array_filter([
@@ -464,7 +464,24 @@ class Appointment extends CallApi
             'reason' => $this->reason,
             'gop' => $this->gop,
         ], function ($v) {
-            return ! is_null($v);
+            return !is_null($v);
         });
+    }
+
+    public static function statusKey(string $event): bool|int
+    {
+        $s = [
+            1 => 'APPOINTMENT_CREATED',
+            2 => 'APPOINTMENT_ACCEPTED',
+            6 => 'APPOINTMENT_STARTED',
+            7 => 'APPOINTMENT_FINISHED',
+            8 => 'APPOINTMENT_CANCELED',
+            9 => 'APPOINTMENT_PRE_SCHEDULE',
+            10 => 'APPOINTMENT_CANCELED_PATIENT',
+            11 => 'APPOINTMENT_CANCELED_DOCTOR',
+            12 => 'APPOINTMENT_NO_SHOW'
+        ];
+
+        return array_search($event, $s);
     }
 }
